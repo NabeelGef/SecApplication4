@@ -113,6 +113,7 @@ public class ClientHandler extends Thread {
                   String dataSignOld =inputStream.readUTF();
                   if(Crypto.VERIFYINGSIGN(DatatypeConverter.parseHexBinary(dataSignOld),str,publicKeyClient)){
                       System.out.println("Signature Success For Client!!");
+                      System.out.println("The Message From Client after decrypt it : " + str);
                       synchronized (receivedMessages)
                       {
                           receivedMessages.add(str);
@@ -222,7 +223,9 @@ public class ClientHandler extends Thread {
                                 try {
                                     //otherClient.sendMessage(messages.get(i));
                                     dataSignature = Crypto.CalculationSignature(privateKeyServer,messages.get(i));
+                                    System.out.println("The Signature is : " + DatatypeConverter.printHexBinary(dataSignature));
                                     String data = Crypto.encrypt(messages.get(i),otherClient.KEY);
+                                    System.out.println("The Message Encrypted  is : " + data);
                                     otherClient.sendMessage(data);
                                     otherClient.sendMessage(DatatypeConverter.printHexBinary(dataSignature));
                                 } catch (Exception e) {
@@ -242,7 +245,10 @@ public class ClientHandler extends Thread {
                                 //send the messages to the other client
                                 try {
                                     dataSignature = Crypto.CalculationSignature(privateKeyServer,messages.get(i));
-                                    sendMessage(Crypto.encrypt(messages.get(i),KEY));
+                                    System.out.println("The Signature is : " + DatatypeConverter.printHexBinary(dataSignature));
+                                    String data = Crypto.encrypt(messages.get(i),KEY);
+                                    System.out.println("The Message Encrypted  is : " + data);
+                                    sendMessage(data);
                                     sendMessage(DatatypeConverter.printHexBinary(dataSignature));
                                 } catch (Exception e) {
                                     e.printStackTrace();

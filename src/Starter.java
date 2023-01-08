@@ -75,8 +75,8 @@ public class Starter {
             Client client = new Client(clientNumber , clientPassword);
 
 
-            System.out.println("Choose the number to connect");
-            int connectNumber = myInput.nextInt() ;
+            /*System.out.println("Choose the number to connect");
+            int connectNumber = myInput.nextInt() ;*/
         }
 
     }

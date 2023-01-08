@@ -80,7 +80,7 @@ public class Client {
 
             //Choose the client to connect  with him
             System.out.print("\nChoose a client number :");
-            otherWriteSource.writeUTF(myInput.next());
+            otherWriteSource.writeUTF(myInput.nextLine());
 
 
             Thread getFromOther = new Thread()
@@ -121,14 +121,17 @@ public class Client {
             String serverResponse = "";
             while (true)
             {
-                serverResponse = myInput.next() ;
+                serverResponse = myInput.nextLine() ;
                 if (serverResponse.equalsIgnoreCase("exit"))
                 {
                     break;
                 }
                 // Send Crypto And Signature
                 dataSigniture = Crypto.CalculationSignature(privateKey , serverResponse);
-                otherWriteSource.writeUTF(Crypto.encrypt(serverResponse,KEY));
+                System.out.println("The Signature is : " + DatatypeConverter.printHexBinary(dataSigniture));
+                String dataEncrypt = Crypto.encrypt(serverResponse,KEY);
+                System.out.println("The Message Encrypted  is : " + dataEncrypt);
+                otherWriteSource.writeUTF(dataEncrypt);
                 otherWriteSource.writeUTF(DatatypeConverter.printHexBinary(dataSigniture));
             }
             isOn = false ;
@@ -193,7 +196,7 @@ public class Client {
             int k = 0 ;
             int p = Integer.parseInt(clientCount) ;
             System.out.println("numbers of clients : " + p);
-            while (k <3)
+            while (k <p-1)
             {
                 numbers = otherReadSource.readUTF() ;
                 synchronized (otherClientNumbers)

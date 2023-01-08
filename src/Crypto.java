@@ -91,16 +91,9 @@ public class Crypto {
         signature = Signature.getInstance("SHA256withRSA");
         signature.initSign(privateKey);
         signature.update(data.getBytes());
-        byte[] s = signature.sign();
-        //System.out.println("BYIE IN Clac Signature : " + DatatypeConverter.printHexBinary(s));
-
-//        signature.initVerify(publicKeytest);
-//        signature.update(data.getBytes());
-//        System.out.println("RESULT SIGN : " + signature.verify(s));
-        return s;
+        return signature.sign();
 }
     public static boolean VERIFYINGSIGN(byte[] sign, String data, PublicKey publicKeyClient) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException {
-        //System.out.println("BYIE IN Verif Signature : " + DatatypeConverter.printHexBinary(sign));
         signature = Signature.getInstance("SHA256withRSA");
         signature.initVerify(publicKeyClient);
         signature.update(data.getBytes());

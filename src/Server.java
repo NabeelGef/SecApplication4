@@ -88,7 +88,7 @@ public class Server {
                                 {
                                     if (clientHandler0.getConnectionNumber().equals(clientHandlerArrayList.get(i).getClientNumber()))
                                     {
-                                        System.out.println("hhhhhhhhhhhhhhhhhhaaaaaaaaaaaaaaaaaa");
+                                        System.out.println("Connected Success ...");
                                         clientHandler0.start();
                                         clientHandlerArrayList.get(i).start();
                                         clientHandler0.makeConnectionWithAnotherClient(clientHandlerArrayList.get(i),privateKey ) ;
